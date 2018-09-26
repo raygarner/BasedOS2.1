@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 
+#define IDT_NUM_ENTRIES 256
+
 void idt_install();
 void idttest();
 
