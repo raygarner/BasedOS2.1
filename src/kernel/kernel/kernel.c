@@ -15,7 +15,8 @@ void kernel_early()
 
 void kernel_main()
 {
+  idt_install();
   printf("BasedOS:-$");
-  //idttest();
+  
 }
 

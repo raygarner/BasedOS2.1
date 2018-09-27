@@ -1,6 +1,7 @@
 #include <kernel/idt.h>
 #include <kernel/io.h>
 #include <stdio.h>
+#include <string.h>
 
 
 #define SET_IDT_ENTRY(idx) \
@@ -56,7 +57,7 @@ DECLARE_INTERRUPT_HANDLER(17);
 DECLARE_INTERRUPT_HANDLER(18);
 DECLARE_INTERRUPT_HANDLER(19);
 
-/* IRQs 
+IRQs 
 DECLARE_INTERRUPT_HANDLER(32);
 DECLARE_INTERRUPT_HANDLER(33);
 DECLARE_INTERRUPT_HANDLER(34);
@@ -186,5 +187,5 @@ void idt_install() {
 
   // Points the processor's internal register to the new IDT
   idt_load(&idtp);
-  printf("IDT installed.\n");
+  //printf("IDT installed.\n");
 }
