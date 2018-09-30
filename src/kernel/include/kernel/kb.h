@@ -3,6 +3,8 @@
 
 void keyboard_install();
 
+void keyboard_handler();
+
 
 
 #endif // _KERNEL_KB_H_

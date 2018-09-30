@@ -111,7 +111,7 @@ unsigned char kbdus[128][4] = {
 
 // Handles the keyboard interrupt
 void keyboard_handler(__attribute__((unused)) struct regs *r) {
-  printf("handlercalled");
+  //printf("kbhandlercalled\n");
   unsigned char scancode;
   int column = 0;
   char clicked = 0;
@@ -181,6 +181,6 @@ void keyboard_install() {
   register_interrupt_handler(KEYBOARD_IDT_INDEX, keyboard_handler);
   state.caps_lock = 0;
   state.shift_held = 0;
-  printf("Keyboard installed.\n");
+  //printf("Keyboard installed.\n");
 }
 

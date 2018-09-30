@@ -175,7 +175,7 @@ void idt_install() {
   SET_IDT_ENTRY(46);
   SET_IDT_ENTRY(47);
 
-  // Remap PICs. Maybe move this somewhere else in the future.
+  // Remap PICs
   outb(0x20, 0x10);
   outb(0xA0, 0x10);
   outb(0x21, 0x20);

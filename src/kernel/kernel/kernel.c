@@ -19,9 +19,13 @@ void kernel_main()
 {
   idt_install();
   keyboard_install();
-  
+  enable_interrupts();
+  //keyboard_handler();
 
-  printf("BasedOS:-$");
-  
+  //printf("BasedOS:-$");
+  for (;;) {
+    asm("hlt");
+  }
+
 }
 

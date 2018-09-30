@@ -23,3 +23,7 @@ inline void io_wait(void){
                    "1:jmp 2f\n\t"
                    "2:" );
 }
+
+inline void enable_interrupts(void) { asm volatile("sti"); }
+
+inline void disable_interrupts(void) { asm volatile("sti"); }

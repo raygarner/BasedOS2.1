@@ -10,16 +10,20 @@ static interrupt_handler_t interrupt_handlers[IDT_NUM_ENTRIES]; //256 element ar
 
 bool register_interrupt_handler(
     uint32_t idt_index, interrupt_handler_t handler) {
+
+  //printf("register interrupt handler called\n");
   
   if (idt_index >= IDT_NUM_ENTRIES){ //if index not in table
+    printf("index not in table");
     return false;
   }
   
   if (interrupt_handlers[idt_index] != NULL) { 
+    printf("index not null");
     return false;
   }
 
-  interrupt_handlers[idt_index] = handler;
+  interrupt_handlers[idt_index] = handler; //puts the address of the routine in corresponding idt segment
   return true;
 }
 
@@ -48,7 +52,9 @@ void irq_handler(struct regs *r) {
   outb(0x20, 0x20);
 }
 
-void run_interrupt_handler(struct regs* r) {
+//this function is called from interrupts_asm.S
+void run_interrupt_handler(struct regs* r) { //currently this function is not getting called
+  //printf("run interrupt handler called\n");
   size_t idt_index = r->idt_index;
   if (idt_index < 32) {
     fault_handler(r);

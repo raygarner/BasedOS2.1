@@ -1,5 +1,3 @@
-
-
 .macro no_error_code_handler idt_index
 .global interrupt_handler_\idt_index
 interrupt_handler_\idt_index:
@@ -20,13 +18,12 @@ interrupt_handler_\idt_index:
 .extern irq_handler
 
 default_interrupt_handler:
-    # Push flags
+    # Push registers to stack to pass as arguments to run_interrupt_handler
     pusha
     push %ds
     push %es
     push %fs
     push %gs
-
     mov $0x10, %ax
     mov %ax, %ds
     mov %ax, %es
@@ -34,7 +31,7 @@ default_interrupt_handler:
     mov %ax, %gs
     mov %esp, %eax  # Push the stack
     push %eax
-    call run_interrupt_handler # hardware call, preserves the 'eip' register
+    call run_interrupt_handler # preserves the 'eip' register
     pop %eax
     pop %gs
     pop %fs
@@ -45,7 +42,7 @@ default_interrupt_handler:
     sti
     iret           # pops CS, EIP, EFLAGS, SS, and ESP
 
-    # ISRs
+# ISRs
 no_error_code_handler 0
 no_error_code_handler 1
 no_error_code_handler 2

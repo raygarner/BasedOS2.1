@@ -21,4 +21,6 @@ typedef void (*interrupt_handler_t)(struct regs* r);
 bool register_interrupt_handler(uint32_t idt_index,
 	                            interrupt_handler_t handler);
 
+void run_interrupt_handler(struct regs* r);
+
 #endif //_INTERRUPT_H_
