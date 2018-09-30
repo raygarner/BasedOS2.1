@@ -35,7 +35,7 @@ extern void idt_load(struct idt_ptr* idt_ptr_addr);
 
 
 
-/* ISRs 
+// ISRs 
 DECLARE_INTERRUPT_HANDLER(0);
 DECLARE_INTERRUPT_HANDLER(1);
 DECLARE_INTERRUPT_HANDLER(2);
@@ -57,7 +57,7 @@ DECLARE_INTERRUPT_HANDLER(17);
 DECLARE_INTERRUPT_HANDLER(18);
 DECLARE_INTERRUPT_HANDLER(19);
 
-IRQs 
+//IRQs 
 DECLARE_INTERRUPT_HANDLER(32);
 DECLARE_INTERRUPT_HANDLER(33);
 DECLARE_INTERRUPT_HANDLER(34);
@@ -73,9 +73,10 @@ DECLARE_INTERRUPT_HANDLER(43);
 DECLARE_INTERRUPT_HANDLER(44);
 DECLARE_INTERRUPT_HANDLER(45);
 DECLARE_INTERRUPT_HANDLER(46);
-//DECLARE_INTERRUPT_HANDLER(47);
-*/
+DECLARE_INTERRUPT_HANDLER(47);
 
+
+/*
 //ISRs
 void interrupt_handler_0(void){}
 void interrupt_handler_1(void){}
@@ -115,6 +116,7 @@ void interrupt_handler_44(void){}
 void interrupt_handler_45(void){}
 void interrupt_handler_46(void){}
 void interrupt_handler_47(void){}
+*/
 
 void set_idt_entry(uint8_t num, uint64_t handler, uint16_t sel, uint8_t flags) {
   idt[num].handler_lo = handler & 0xFFFF;

@@ -6,15 +6,16 @@
 #include <stdio.h>
 #include <string.h>
 
-static interrupt_handler_t interrupt_handlers[IDT_NUM_ENTRIES];
+static interrupt_handler_t interrupt_handlers[IDT_NUM_ENTRIES]; //256 element array
 
 bool register_interrupt_handler(
     uint32_t idt_index, interrupt_handler_t handler) {
-  if (idt_index >= IDT_NUM_ENTRIES) {
+  
+  if (idt_index >= IDT_NUM_ENTRIES){ //if index not in table
     return false;
   }
   
-  if (interrupt_handlers[idt_index] != NULL) {
+  if (interrupt_handlers[idt_index] != NULL) { 
     return false;
   }
 
@@ -22,7 +23,7 @@ bool register_interrupt_handler(
   return true;
 }
 
-void fault_handler(struct regs *r) {
+void fault_handler(/*struct regs *r*/) {
   printf("System Exception. System Halted!\n");
   for (;;);
 }

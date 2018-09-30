@@ -67,3 +67,17 @@ void terminal_write(const char* data, size_t size) {
 void terminal_writestring(const char* data) {
 	terminal_write(data, strlen(data));
 }
+
+void t_backspace() {
+  if (terminal_column == 0) {
+    if (terminal_row > 0) {
+      terminal_row--;
+    }
+    //terminal_column = terminal_line_fill[t_row];
+  } else {
+    terminal_column--;
+  }
+
+  terminal_putentryat(32, terminal_color, terminal_column, terminal_row);
+  update_cursor(terminal_row, terminal_column);
+}

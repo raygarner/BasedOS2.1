@@ -4,6 +4,8 @@
 #include<stdint.h>
 #include<kernel/gdt.h>
 #include<kernel/idt.h>
+#include<kernel/interrupts.h>
+#include<kernel/kb.h>
 
 
 
@@ -16,6 +18,9 @@ void kernel_early()
 void kernel_main()
 {
   idt_install();
+  keyboard_install();
+  
+
   printf("BasedOS:-$");
   
 }

@@ -15,6 +15,7 @@ struct regs {
   uint32_t eip, cs, eflags, useresp, ss;            // pushed automatically
 };
 
+
 typedef void (*interrupt_handler_t)(struct regs* r);
 
 bool register_interrupt_handler(uint32_t idt_index,
