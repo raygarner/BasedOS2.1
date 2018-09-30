@@ -68,7 +68,7 @@ void terminal_writestring(const char* data) {
 	terminal_write(data, strlen(data));
 }
 
-void t_backspace() {
+void terminal_backspace() {
   if (terminal_column == 0) {
     if (terminal_row > 0) {
       terminal_row--;

@@ -125,7 +125,7 @@ void keyboard_handler(__attribute__((unused)) struct regs *r) {
   } else {
     switch (scancode) {
         case 14:  // backspace
-        t_backspace();
+        terminal_backspace();
         break;
       case 42:  // shifts
       case 54:
