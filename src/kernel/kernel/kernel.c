@@ -23,6 +23,8 @@ void kernel_main()
   //keyboard_handler();
 
   //printf("BasedOS:-$");
+  
+  //tell the cpu to simply wait until it recieves an interrupt
   for (;;) {
     asm("hlt");
   }
