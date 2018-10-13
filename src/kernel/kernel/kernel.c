@@ -20,9 +20,9 @@ void kernel_main()
   idt_install();
   keyboard_install();
   enable_interrupts();
-  //keyboard_handler();
+  
 
-  //printf("BasedOS:-$");
+  printf("note: right shift release not working.\n");
   
   //tell the cpu to simply wait until it recieves an interrupt
   for (;;) {

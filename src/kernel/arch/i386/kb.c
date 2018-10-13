@@ -20,8 +20,8 @@ unsigned char kbdus[128][4] = {
     {0, 0, 0, 0},
     {27, 27, 27, 27},
     {'1', '!', '1', '!'},
-    {'2', '@', '2', '@'},
-    {'3', '#', '3', '#'},
+    {'2', '"', '2', '"'},
+    {'3', '£', '3', '£'},
     {'4', '$', '4', '$'},
     {'5', '%', '5', '%'},
     {'6', '^', '6', '^'},
@@ -57,7 +57,7 @@ unsigned char kbdus[128][4] = {
     {'k', 'K', 'K', 'k'},
     {'l', 'L', 'L', 'l'},
     {';', ':', ';', ':'},  // index 39
-    {'\'', '\"', '\'', '\"'},
+    {'\'', '@', '\'', '@'},
     {'`', '~', '`', '~'},
     {0, 0, 0, 0},  // Left Shift
     {'\\', '|', '\\', '|'},
@@ -120,6 +120,7 @@ void keyboard_handler(__attribute__((unused)) struct regs *r) {
   // If the top bit of the scancode is set, a key has just been released
   if (scancode & 0x80) {
     if (scancode >> 2 == 42 || scancode >> 2 == 54) {
+     
       state.shift_held = 0;
     }
   } else {
@@ -134,6 +135,7 @@ void keyboard_handler(__attribute__((unused)) struct regs *r) {
       case 58:  // caps lock
         state.caps_lock = !state.caps_lock;
         break;
+      
       default:
         column = state.shift_held * 1 + state.caps_lock * 2;
         clicked = kbdus[scancode][column];
