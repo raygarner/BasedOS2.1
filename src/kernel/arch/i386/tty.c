@@ -52,7 +52,8 @@ void terminal_putchar(char c) {
   if (++terminal_column == VGA_WIDTH || c == '\n') {
     terminal_column = 0;
     if (++terminal_row == VGA_HEIGHT)
-      terminal_row = 0; //scroll stuff
+      //terminal_row = 0; //scroll stuff
+			terminal_scroll();
 
 		if (c == '\n')
 			printf("BasedOS:");
@@ -84,3 +85,38 @@ void terminal_backspace() {
   terminal_putentryat(32, terminal_color, terminal_column, terminal_row);
   update_cursor(terminal_row, terminal_column);
 }
+
+void terminal_scroll(){
+  int x;
+  int y;
+
+  for(x = 0; x<80; ++x){
+    for(y = 0; y<24; ++y){
+      terminal_buffer[y * 80 + x] = terminal_buffer[(y + 1) * 80 + x];
+
+    }
+  }
+
+  terminal_row = 24;
+  clear_line();
+  //terminal_writestring("BasedOS:");
+
+
+}
+
+void clear_line(){
+  terminal_column = 0;
+  terminal_writestring("                                                                               "); //writes a line of spaces
+  terminal_buffer[24 * 80 + 79] = vga_entry(' ', terminal_color); 
+  
+  /*
+  for(j = 0; j<VGA_WIDTH ;++j)
+    terminal_putchar(' ');
+  */
+
+  terminal_column = 0;
+
+
+}
+
+
