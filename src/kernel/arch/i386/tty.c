@@ -92,12 +92,12 @@ void terminal_putchar(char c) {
     terminal_column = 0;
 		
     if (++terminal_row == VGA_HEIGHT)
-      //terminal_row = 0; //scroll stuff
 			terminal_scroll();
 
 		if (c == '\n'){
+			
 			printf("BasedOS:");
-			offset = 0;
+			offset = 8;
 		}
   }
 	
@@ -115,7 +115,7 @@ void terminal_writestring(const char* data) {
 }
 
 void terminal_backspace() {
-  if (offset != 0) {
+  if (offset != 8) {
        terminal_column--;
 			 offset--;
   }
