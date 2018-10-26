@@ -19,6 +19,44 @@ static size_t terminal_column;
 static uint8_t terminal_color;
 static uint16_t* terminal_buffer;
 
+int offset;
+
+void clear_line(){
+  terminal_column = 0;
+  terminal_writestring("                                                                               "); //writes a line of spaces
+  terminal_buffer[24 * 80 + 79] = vga_entry(' ', terminal_color); 
+  
+  /*
+  for(j = 0; j<VGA_WIDTH ;++j)
+    terminal_putchar(' ');
+  */
+
+  terminal_column = 0;
+
+
+}
+
+
+void terminal_scroll(){
+  int x;
+  int y;
+
+  for(x = 0; x<80; ++x){
+    for(y = 0; y<24; ++y){
+      terminal_buffer[y * 80 + x] = terminal_buffer[(y + 1) * 80 + x];
+
+    }
+  }
+
+  terminal_row = 24;
+  clear_line();
+  //terminal_writestring("BasedOS:");
+
+
+}
+
+
+
 void terminal_initialize(void) {
 	terminal_row = 0;
 	terminal_column = 0;
@@ -44,19 +82,23 @@ void terminal_putentryat(unsigned char c, uint8_t color, size_t x, size_t y) {
 
 void terminal_putchar(char c) {
 	unsigned char uc = c;
-  
+	offset++;
+
   if (c != '\n'){ //if not a new line then print the character
     terminal_putentryat(uc, terminal_color, terminal_column, terminal_row);
   }    
   
   if (++terminal_column == VGA_WIDTH || c == '\n') {
     terminal_column = 0;
+		
     if (++terminal_row == VGA_HEIGHT)
       //terminal_row = 0; //scroll stuff
 			terminal_scroll();
 
-		if (c == '\n')
+		if (c == '\n'){
 			printf("BasedOS:");
+			offset = 0;
+		}
   }
 	
 
@@ -73,50 +115,14 @@ void terminal_writestring(const char* data) {
 }
 
 void terminal_backspace() {
-  if (terminal_column == 0) {
-    if (terminal_row > 0) {
-      terminal_row--;
-    }
-    //terminal_column = terminal_line_fill[t_row];
-  } else {
-    terminal_column--;
+  if (offset != 0) {
+       terminal_column--;
+			 offset--;
   }
 
   terminal_putentryat(32, terminal_color, terminal_column, terminal_row);
   update_cursor(terminal_row, terminal_column);
 }
 
-void terminal_scroll(){
-  int x;
-  int y;
-
-  for(x = 0; x<80; ++x){
-    for(y = 0; y<24; ++y){
-      terminal_buffer[y * 80 + x] = terminal_buffer[(y + 1) * 80 + x];
-
-    }
-  }
-
-  terminal_row = 24;
-  clear_line();
-  //terminal_writestring("BasedOS:");
-
-
-}
-
-void clear_line(){
-  terminal_column = 0;
-  terminal_writestring("                                                                               "); //writes a line of spaces
-  terminal_buffer[24 * 80 + 79] = vga_entry(' ', terminal_color); 
-  
-  /*
-  for(j = 0; j<VGA_WIDTH ;++j)
-    terminal_putchar(' ');
-  */
-
-  terminal_column = 0;
-
-
-}
 
 
