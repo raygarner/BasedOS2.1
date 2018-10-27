@@ -20,6 +20,8 @@ static uint8_t terminal_color;
 static uint16_t* terminal_buffer;
 
 int offset;
+int mode; //this variable stores the current display mode eg if in shell mode then mode = 0, if in a program then 1. this is yet to be implemented properly 
+					//but it is for the future
 
 void clear_line(){
   terminal_column = 0;
