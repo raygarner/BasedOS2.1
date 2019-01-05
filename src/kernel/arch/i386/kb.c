@@ -118,9 +118,9 @@ void keyboard_handler(__attribute__((unused)) struct regs *r) {
   // Read from the keyboard's data buffer
   scancode = inb(0x60);
   // If the top bit of the scancode is set, a key has just been released
-  if (scancode & 0x80) {
-    if (scancode >> 2 == 42 || scancode >> 2 == 54) {
-     
+  if (scancode & 0x80) { //masking
+    //if (scancode >> 2 == 42 || scancode >> 2 == 54) { //shift has just been released
+    if (scancode == 0xAA || scancode == 0xB6) { //if left shift or right shift released
       state.shift_held = 0;
     }
   } else {

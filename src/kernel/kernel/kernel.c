@@ -22,7 +22,7 @@ void kernel_main()
   enable_interrupts();
   
 
-  printf("note: right shift release not working.\n");
+  //printf("note: right shift release not working.\n");
   
   //tell the cpu to simply wait until it recieves an interrupt
   for (;;) {
